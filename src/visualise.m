@@ -3,7 +3,11 @@
 %
 % See the LICENCE file for more information.
 
-pts = genpoints("clusters", 100);
+pts = genpoints("clst", 100);
 
-% plot analysed datapoints
+[centres] = algoFCM(pts, 5);
+
 scatter(pts(:,1), pts(:,2), "Marker", "+");
+hold on;
+scatter(centres(:,1), centres(:,2), "filled", "Marker", "o");
+hold off;
