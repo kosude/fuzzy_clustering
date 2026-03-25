@@ -1,0 +1,3 @@
+generateData.m
+    Copyright (c) 2013-2020 Nuno Fachada
+    https://github.com/nunofachada/generateData
