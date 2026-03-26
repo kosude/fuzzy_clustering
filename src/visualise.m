@@ -5,9 +5,9 @@
 
 pts = genpoints("clst", 100);
 
-[centres] = algoFCM(pts, 5);
+[c, u] = algoFCM(pts, 5, 2, maxItr=1);
 
 scatter(pts(:,1), pts(:,2), "Marker", "+");
 hold on;
-scatter(centres(:,1), centres(:,2), "filled", "Marker", "o");
+scatter(c(:,1), c(:,2), "filled", "Marker", "o");
 hold off;
