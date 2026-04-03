@@ -1,4 +1,5 @@
-fuzzy_clustering
+An implementation of fuzzy c-means (FCM) clustering, written in MATLAB
+(but originally in Python, because MATLAB sucks).
 
 REFERENCES:
     https://uk.mathworks.com/help/fuzzy/fuzzy-clustering.html
