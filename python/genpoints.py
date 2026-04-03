@@ -6,13 +6,17 @@
 if __name__ == "__main__":
     exit(0)
 
+import random
 from sklearn.datasets import make_blobs
+import numpy as np
 
-def genpoints(method, n):
+def genpoints(method, N, C):
     match method:
         case "clst":
-            pts, y = make_blobs(n_samples=n,
-                                centers=4,
+            x, c = make_blobs(n_samples=N,
+                                centers=C,
                                 cluster_std=0.60,
                                 random_state=0)
-            return pts, y
+            return np.array(x), c
+        case _:
+            raise Exception(f"Invalid point generation method \"{method}\"")
