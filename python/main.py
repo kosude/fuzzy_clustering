@@ -20,16 +20,16 @@ N = 10
 D = 2 # TODO genpoints currently requires this to be 2
 C = 4
 z = 2
+max_itr = 2
 
 x, _, ytarget = genpoints("clst", N, D, C)
-y, d = fcm(x, N, D, C, z)
-
+y, d, u, itr = fcm(x, N, D, C, z, max_itr=max_itr)
 
 ##
 ## Plotting
 
-plt.figure("Fuzzy c-means clustering (Python implementation)",
-           figsize=(10, 6))
+fig = plt.figure("Fuzzy c-means clustering (Python implementation)",
+                 figsize=(10, 6))
 
 sc_x = plt.scatter(x[0, :],
                    x[1, :],
@@ -80,7 +80,8 @@ def plt_d_curs_onadd(sel):
             yaxis += [x[1, sel.index], y[1, i]]
 
             # add tracked annotation
-            plt_d_anns.append(plt.annotate(f"d={d[i, sel.index]:.2f}",
+            plt_d_anns.append(plt.annotate(f"$d$={d[i, sel.index]:.2f}\n" \
+                                           f"$\\mu$={u[i, sel.index]:.2f}",
                                            xy=(y[0, i], y[1, i]),
                                            **plt_d_ann_kwargs))
     else:
@@ -90,7 +91,8 @@ def plt_d_curs_onadd(sel):
             yaxis += [x[1, i], y[1, sel.index]]
 
             # add tracked annotation
-            plt_d_anns.append(plt.annotate(f"d={d[sel.index, i]:.2f}",
+            plt_d_anns.append(plt.annotate(f"$d$={d[sel.index, i]:.2f}\n" \
+                                           f"$\\mu$={u[sel.index, i]:.2f}",
                                            xy=(x[0, i], x[1, i]),
                                            **plt_d_ann_kwargs))
 
@@ -99,5 +101,6 @@ def plt_d_curs_onadd(sel):
 
 # show plots on one set of axes
 plt.legend()
-plt.title("Fuzzy c-means cluster analysis: predicted centres against data")
+plt.suptitle("Fuzzy c-means cluster analysis: predicted centres against data")
+plt.title(f"{itr} iteration(s)")
 plt.show()
