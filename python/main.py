@@ -28,7 +28,8 @@ y, d = fcm(x, N, D, C, z)
 ##
 ## Plotting
 
-plt.figure(figsize=(10, 6))
+plt.figure("Fuzzy c-means clustering (Python implementation)",
+           figsize=(10, 6))
 
 sc_x = plt.scatter(x[0, :],
                    x[1, :],
