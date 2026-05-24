@@ -52,6 +52,7 @@ def fcm(x, N, D, C, z, max_itr=4, min_J=1e-5):
             for j in range(N):
                 x_j = x[:, j]
 
+                # Euclidean distance between points x_j and y_i
                 d[i, j] = np.sqrt(np.sum((x_j - y_i) ** 2))
 
         # update fuzzy partition matrix

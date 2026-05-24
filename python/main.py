@@ -16,7 +16,7 @@ np.set_printoptions(linewidth=150)
 ##
 ## Data generation and computations
 
-N = 10
+N = 100
 D = 2 # TODO genpoints currently requires this to be 2
 C = 4
 z = 2
@@ -30,27 +30,28 @@ y, d, u, itr = fcm(x, N, D, C, z, max_itr=max_itr)
 
 fig = plt.figure("Fuzzy c-means clustering (Python implementation)",
                  figsize=(10, 6))
+ax = plt.gca()
 
-sc_x = plt.scatter(x[0, :],
-                   x[1, :],
-                   facecolors="none",
-                   edgecolors="lime",
-                   label="Input data $x$",
-                   zorder=20)
-sc_y = plt.scatter(y[0, :],
-                   y[1, :],
-                   c="red",
-                   label="Predicted clusters $y$",
-                   zorder=20)
-sc_ytarget = plt.scatter(ytarget[0, :],
-                         ytarget[1, :],
-                         marker="P",
-                         c="green",
-                         label="Target values for $y$",
-                         zorder=30)
+sc_x = ax.scatter(x[0, :],
+                  x[1, :],
+                  facecolors="none",
+                  edgecolors="lime",
+                  label="Input data $x$",
+                  zorder=20)
+sc_y = ax.scatter(y[0, :],
+                  y[1, :],
+                  c="red",
+                  label="Predicted clusters $y$",
+                  zorder=20)
+sc_ytarget = ax.scatter(ytarget[0, :],
+                        ytarget[1, :],
+                        marker="P",
+                        c="green",
+                        label="Target values for $y$",
+                        zorder=30)
 
 # line plot used to interactively show distances
-plt_d, = plt.plot([], [], c="lightgrey", linestyle="dotted", zorder=0)
+plt_d, = ax.plot([], [], c="lightgrey", linestyle="dotted", zorder=0)
 plt_d_curs = mplcursors.cursor([sc_x, sc_y], hover=2)
 plt_d_anns = []
 plt_d_ann_kwargs = { "fontsize": 8,
@@ -97,10 +98,11 @@ def plt_d_curs_onadd(sel):
                                            **plt_d_ann_kwargs))
 
     plt_d.set_data(xaxis, yaxis)
-    plt.show()
+    plt.draw()
 
 # show plots on one set of axes
 plt.legend()
 plt.suptitle("Fuzzy c-means cluster analysis: predicted centres against data")
 plt.title(f"{itr} iteration(s)")
+plt.pause(0.01)
 plt.show()
